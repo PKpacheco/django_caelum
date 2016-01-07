@@ -1,6 +1,5 @@
-from __future__ import unicode_literals
-
 from django.db import models
+from django.contrib.auth.models import User
 
 class Perfil(models.Model):
 #troca do object pelo model
@@ -12,10 +11,15 @@ class Perfil(models.Model):
 #        self.nome_empresa = nome_empresa
 
     nome =  models.CharField(max_length=255, null=False) 
-    email = models.CharField(max_length=255, null=False) 
+    #email = models.CharField(max_length=255, null=False) a classe usuario/perfil tem emails 
     telefone = models.CharField(max_length =15, null=False)
     nome_empresa = models.CharField(max_length=255, null=False)
     contatos = models.ManyToManyField('self')
+    usuario = models.OneToOneField(User, related_name="perfil")
+
+    @property
+    def email(self):
+        return self.usuario.email
 
     def convidar(self, perfil_convidado):    
         Convite(solicitante = self, convidado = perfil_convidado).save()
