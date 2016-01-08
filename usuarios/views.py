@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from usuarios.forms import RegistrarUsuarioForm
 from django.contrib.auth.models import User
+from perfis.models import Perfil
 
 class RegistrarUsuarioView(View):
 
@@ -10,7 +11,7 @@ class RegistrarUsuarioView(View):
         return render(request, self.template_name)
 
     def post(self, request): 
-        form = RegistrarUsuarioForms(request.POST)
+        form = RegistrarUsuarioForm(request.POST)
 
         if form.is_valid():
             dados_form = form.data

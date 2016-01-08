@@ -2,6 +2,7 @@
 {% block body %}
     <form class="form-signin" action="{% url 'registrar' %}" method="post">
         {% csrf_token %}
+        
         <h2 class="form-signin-heading">Crie seu usuário</h2>
 
         <input id="id_email" name="email" type="text"

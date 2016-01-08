@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 class RegistrarUsuarioForm(forms.Form):
 
-    nome = forms.Charfield(required=True)
+    nome = forms.CharField(required=True)
     email = forms.EmailField(required=True)
-    senha = forms.Charfield(required=True)
-    telefone = forms.Charfield(required=True)
-    nome_empresa = forms.Charfield(required=True)
+    senha = forms.CharField(required=True)
+    telefone = forms.CharField(required=True)
+    nome_empresa = forms.CharField(required=True)
 
     def is_valid(self):
         valid = True
@@ -23,8 +23,9 @@ class RegistrarUsuarioForm(forms.Form):
         return valid
 
     def adiciona_erro(self, message):
-        erros = self._erros.setdefault(
+        errors = self._errors.setdefault(
             forms.forms.NON_FIELD_ERRORS, 
-            forms.util.ErrorList()
+            forms.utils.ErrorList()
             )
-        error.append(message)
+
+        errors.append(message)
